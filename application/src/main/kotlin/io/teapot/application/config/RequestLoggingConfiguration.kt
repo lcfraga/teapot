@@ -7,7 +7,7 @@ import org.springframework.web.filter.CommonsRequestLoggingFilter
 private const val MAX_PAYLOAD_LENGTH = 10000
 
 @Configuration
-class RequestLoggingFilterConfiguration {
+class RequestLoggingConfiguration {
 
     @Bean
     fun logFilter(): CommonsRequestLoggingFilter? {
