@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<SmellBaseline>
+  <ManuallySuppressedIssues>
+    <ID>SpreadOperator:TeapotApplication.kt$(*args)</ID>
+  </ManuallySuppressedIssues>
+  <CurrentIssues>
+  </CurrentIssues>
+</SmellBaseline>

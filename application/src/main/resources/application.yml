@@ -1,0 +1,26 @@
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+
+# https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready-endpoints-enabling-endpoints
+management:
+  endpoint:
+    health:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    jmx:
+      exposure:
+        exclude: '*'
+    web:
+      exposure:
+        include: 'health,prometheus'
+
+server:
+  tomcat:
+    connection-timeout: 10000
