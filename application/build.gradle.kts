@@ -13,14 +13,16 @@ object DependencyVersions {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-security")
+    // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
+    // Jackson support for Kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
+    // Prometheus actuator
     implementation("io.micrometer:micrometer-registry-prometheus:${DependencyVersions.PROMETHEUS}")
 
+    // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.security:spring-security-test")
 }
