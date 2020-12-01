@@ -8,14 +8,21 @@ plugins {
 
 object DependencyVersions {
     const val PROMETHEUS = "1.6.0"
+    const val SPRING_DOC = "1.5.0"
 }
 
 dependencies {
     implementation(project(":dataprovider"))
+    implementation(project(":usecase"))
+    implementation(project(":domain"))
 
     // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+
+    // Spring Doc/Swagger UI
+    implementation("org.springdoc:springdoc-openapi-kotlin:${DependencyVersions.SPRING_DOC}")
+    implementation("org.springdoc:springdoc-openapi-ui:${DependencyVersions.SPRING_DOC}")
 
     // Jackson support for Kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")

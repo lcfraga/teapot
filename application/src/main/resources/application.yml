@@ -43,3 +43,10 @@ spring:
         show_sql: true
         use_sql_comments: true
     open-in-view: false
+
+springdoc:
+  api-docs:
+    enabled: true
+  show-actuator: true
+  swagger-ui:
+    enabled: true
