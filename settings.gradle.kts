@@ -1,3 +1,3 @@
 rootProject.name = "teapot"
 
-include("application", "usecase", "domain")
+include("application", "dataprovider", "usecase", "domain")

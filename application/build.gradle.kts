@@ -7,12 +7,12 @@ plugins {
 }
 
 object DependencyVersions {
-    const val JWT = "0.11.2"
-    const val SPRING_DOC = "1.5.0"
     const val PROMETHEUS = "1.6.0"
 }
 
 dependencies {
+    implementation(project(":dataprovider"))
+
     // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")

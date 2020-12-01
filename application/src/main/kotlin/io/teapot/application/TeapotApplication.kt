@@ -5,7 +5,8 @@ import org.springframework.boot.runApplication
 
 @SpringBootApplication(
     scanBasePackages = [
-        "io.teapot.application.config"
+        "io.teapot.application.config",
+        "io.teapot.dataprovider.config"
     ]
 )
 class TeapotApplication
