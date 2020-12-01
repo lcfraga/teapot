@@ -2,6 +2,7 @@
 <SmellBaseline>
   <ManuallySuppressedIssues>
     <ID>SpreadOperator:TeapotApplication.kt$(*args)</ID>
+    <ID>ReturnCount:CreateBeverage.kt$CreateBeverage$fun create(beverageWithoutId: BeverageWithoutId): CreateBeverageResult</ID>
   </ManuallySuppressedIssues>
   <CurrentIssues>
   </CurrentIssues>
