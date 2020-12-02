@@ -4,6 +4,7 @@
     <ID>SpreadOperator:TeapotApplication.kt$(*args)</ID>
     <ID>ReturnCount:CreateBeverage.kt$CreateBeverage$fun create(beverageWithoutId: BeverageWithoutId): CreateBeverageResult</ID>
     <ID>ReturnCount:UpdateBeverage.kt$UpdateBeverage$fun update(id: String, beverageWithoutId: BeverageWithoutId): UpdateBeverageResult</ID>
+    <ID>ReturnCount:OrderBeverage.kt$OrderBeverage$private fun order(orderWithoutId: OrderWithoutId, beverage: Beverage): OrderBeverageResult</ID>
   </ManuallySuppressedIssues>
   <CurrentIssues>
   </CurrentIssues>
