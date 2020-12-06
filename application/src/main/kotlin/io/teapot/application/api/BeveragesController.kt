@@ -96,7 +96,7 @@ class BeveragesController(
     }
 
     override fun deleteById(id: String): ResponseEntity<Any> {
-        return when (val deleteBeverageResult = deleteBeverage.deleteById(id)) {
+        return when (deleteBeverage.deleteById(id)) {
             is DeleteBeverageResult.Deleted ->
                 ResponseEntity
                     .status(HttpStatus.OK)
