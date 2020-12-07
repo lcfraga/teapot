@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -28,6 +30,27 @@ data class OrderResponseBody(
 @RequestMapping("/orders")
 @Tag(name = "Orders", description = "Create and find beverage orders")
 interface OrdersApi {
+    @Operation(summary = "Find order by ID")
+    @ApiResponses(
+        value = [
+            ApiResponse(
+                responseCode = "200",
+                description = "Order found",
+                content = [
+                    Content(
+                        mediaType = "application/json",
+                        schema = Schema(implementation = OrderResponseBody::class)
+                    )
+                ]
+            ),
+            ApiResponse(responseCode = "404", description = "Order not found", content = [Content()])
+        ]
+    )
+    @GetMapping("/{id}", produces = ["application/json"])
+    fun findById(
+        @PathVariable("id") id: String
+    ): ResponseEntity<Any>
+
     @Operation(summary = "Order beverage")
     @ApiResponses(
         value = [
