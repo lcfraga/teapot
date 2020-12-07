@@ -1,0 +1,57 @@
+package io.teapot.application.api
+
+import io.teapot.domain.entity.Order
+import io.teapot.domain.entity.OrderWithoutId
+import io.teapot.usecase.beverages.OrderBeverage
+import io.teapot.usecase.beverages.OrderBeverageResult
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.RestController
+
+private fun OrderBeverageRequest.toOrderWithoutId() = OrderWithoutId(
+    beverage,
+    username,
+    size
+)
+
+private fun Order.toOrderResponseBody() = OrderResponseBody(
+    id,
+    beverage,
+    settings,
+    username,
+    size.toString(),
+    createdAt,
+    served,
+    servedAt
+)
+
+@RestController
+class OrdersController(
+    private val orderBeverage: OrderBeverage
+) : OrdersApi {
+
+    override fun create(orderBeverageRequest: OrderBeverageRequest): ResponseEntity<Any> {
+        return when (val orderBeverageResult = orderBeverage.order(orderBeverageRequest.toOrderWithoutId())) {
+            is OrderBeverageResult.Ordered ->
+                ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(orderBeverageResult.order.toOrderResponseBody())
+            is OrderBeverageResult.Invalid ->
+                ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body(orderBeverageResult.errors)
+            is OrderBeverageResult.BeverageNotFound ->
+                ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .build()
+            is OrderBeverageResult.Rejected ->
+                ResponseEntity
+                    .status(HttpStatus.I_AM_A_TEAPOT)
+                    .build()
+            is OrderBeverageResult.InsufficientWater ->
+                ResponseEntity
+                    .status(HttpStatus.TOO_MANY_REQUESTS)
+                    .build()
+        }
+    }
+}

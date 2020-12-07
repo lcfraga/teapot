@@ -5,6 +5,8 @@
     <ID>ReturnCount:CreateBeverage.kt$CreateBeverage$fun create(beverageWithoutId: BeverageWithoutId): CreateBeverageResult</ID>
     <ID>ReturnCount:UpdateBeverage.kt$UpdateBeverage$fun update(id: String, beverageWithoutId: BeverageWithoutId): UpdateBeverageResult</ID>
     <ID>ReturnCount:OrderBeverage.kt$OrderBeverage$private fun order(orderWithoutId: OrderWithoutId, beverage: Beverage): OrderBeverageResult</ID>
+    <ID>MagicNumber:BeverageUseCaseConfiguration.kt$BeverageUseCaseConfiguration.&lt;no name provided&gt;$10</ID>
+    <ID>MagicNumber:BeverageUseCaseConfiguration.kt$BeverageUseCaseConfiguration.&lt;no name provided&gt;$9</ID>
   </ManuallySuppressedIssues>
   <CurrentIssues>
   </CurrentIssues>
