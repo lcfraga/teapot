@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController
 private fun OrderBeverageRequest.toOrderWithoutId() = OrderWithoutId(
     beverage,
     username,
-    size
+    size.toUpperCase()
 )
 
 private fun Order.toOrderResponseBody() = OrderResponseBody(
