@@ -8,7 +8,10 @@ import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.boot.test.web.client.getForEntity
 import org.springframework.boot.web.server.LocalServerPort
 import org.springframework.http.HttpStatus
+import org.testcontainers.junit.jupiter.Container
+import org.testcontainers.junit.jupiter.Testcontainers
 
+@Testcontainers
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
@@ -16,6 +19,12 @@ class TeapotApplicationTests(
     @LocalServerPort private var port: Int,
     @Autowired val restTemplate: TestRestTemplate
 ) {
+
+    companion object {
+        @Container
+        val postgreSQLContainer = SingletonPostgreSQLContainer
+    }
+
     @Test
     fun healthActuator_reportsStatusUp() {
         data class HealthResponse(val status: String)

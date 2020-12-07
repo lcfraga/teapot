@@ -9,6 +9,7 @@ plugins {
 object DependencyVersions {
     const val PROMETHEUS = "1.6.0"
     const val SPRING_DOC = "1.5.0"
+    const val TESTCONTAINERS = "1.15.0"
 }
 
 dependencies {
@@ -32,4 +33,9 @@ dependencies {
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    // Testcontainers
+    testImplementation(platform("org.testcontainers:testcontainers-bom:${DependencyVersions.TESTCONTAINERS}"))
+    testImplementation("org.testcontainers:junit-jupiter")
+    testImplementation("org.testcontainers:postgresql")
 }
