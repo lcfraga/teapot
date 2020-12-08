@@ -53,7 +53,7 @@ If those ports are available, build the docker image and start the docker compos
 docker-compose up
 ```
 
-Once that's done, we can use the `EXPOSED_TEAPOT_PORT` environment variable to override the host port at which the teapot service is exposed:
+We can use the `EXPOSED_TEAPOT_PORT` environment variable to override the host port at which the teapot service is exposed:
 
 ```sh
 EXPOSED_TEAPOT_PORT=8081 docker-compose up
