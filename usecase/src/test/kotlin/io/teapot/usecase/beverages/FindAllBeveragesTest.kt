@@ -1,4 +1,4 @@
-package io.teapot.application.usecase.beverages
+package io.teapot.usecase.beverages
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.data.row
@@ -8,8 +8,6 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import io.teapot.domain.entity.Beverage
-import io.teapot.usecase.beverages.FindAllBeverages
-import io.teapot.usecase.beverages.FindAllBeveragesResult
 import io.teapot.usecase.beverages.port.FindAllBeveragesPort
 
 class FindAllBeveragesTest : DescribeSpec({

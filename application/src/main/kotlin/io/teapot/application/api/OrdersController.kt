@@ -2,6 +2,8 @@ package io.teapot.application.api
 
 import io.teapot.domain.entity.Order
 import io.teapot.domain.entity.OrderWithoutId
+import io.teapot.usecase.beverages.FindAllOrders
+import io.teapot.usecase.beverages.FindAllOrdersResult
 import io.teapot.usecase.beverages.FindOrder
 import io.teapot.usecase.beverages.FindOrderResult
 import io.teapot.usecase.beverages.OrderBeverage
@@ -29,9 +31,18 @@ private fun Order.toOrderResponseBody() = OrderResponseBody(
 
 @RestController
 class OrdersController(
+    private val findAllOrders: FindAllOrders,
     private val findOrder: FindOrder,
     private val orderBeverage: OrderBeverage
 ) : OrdersApi {
+
+    override fun findAll(paginationParameters: PaginationParameters): PaginatedResponse<OrderResponseBody> {
+        return when (val findAllOrdersResult = findAllOrders.findAll(paginationParameters.toRequestedPage())) {
+            is FindAllOrdersResult.Found ->
+                findAllOrdersResult.orders
+                    .toPaginatedResponse(Order::toOrderResponseBody)
+        }
+    }
 
     override fun findById(id: String): ResponseEntity<Any> {
         return when (val findOrderResult = findOrder.findById(id)) {

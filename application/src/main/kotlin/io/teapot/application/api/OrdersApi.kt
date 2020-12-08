@@ -1,6 +1,9 @@
 package io.teapot.application.api
 
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.Parameters
+import io.swagger.v3.oas.annotations.enums.ParameterIn
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -30,6 +33,27 @@ data class OrderResponseBody(
 @RequestMapping("/orders")
 @Tag(name = "Orders", description = "Create and find beverage orders")
 interface OrdersApi {
+    @Operation(summary = "Find all orders (paginated)")
+    @ApiResponses(
+        value = [ApiResponse(responseCode = "200", description = "Orders found")]
+    )
+    @Parameters(
+        Parameter(
+            `in` = ParameterIn.QUERY,
+            name = "page",
+            schema = Schema(type = "integer", defaultValue = PaginationParameters.DEFAULT_PAGE.toString())
+        ),
+        Parameter(
+            `in` = ParameterIn.QUERY,
+            name = "size",
+            schema = Schema(type = "integer", defaultValue = PaginationParameters.DEFAULT_SIZE.toString())
+        )
+    )
+    @GetMapping(produces = ["application/json"])
+    fun findAll(
+        @Parameter(hidden = true) paginationParameters: PaginationParameters
+    ): PaginatedResponse<OrderResponseBody>
+
     @Operation(summary = "Find order by ID")
     @ApiResponses(
         value = [

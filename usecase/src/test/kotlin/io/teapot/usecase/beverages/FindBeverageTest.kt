@@ -1,4 +1,4 @@
-package io.teapot.application.usecase.beverages
+package io.teapot.usecase.beverages
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
@@ -7,8 +7,6 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
 import io.teapot.domain.entity.Beverage
-import io.teapot.usecase.beverages.FindBeverage
-import io.teapot.usecase.beverages.FindBeverageResult
 import io.teapot.usecase.beverages.port.FindBeveragePort
 import java.util.Optional
 

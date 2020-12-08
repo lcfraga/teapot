@@ -1,4 +1,4 @@
-package io.teapot.application.usecase.beverages.validator
+package io.teapot.usecase.beverages.validator
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.data.row
@@ -9,7 +9,6 @@ import io.kotest.matchers.maps.shouldHaveSize
 import io.kotest.matchers.maps.shouldNotBeEmpty
 import io.teapot.domain.entity.OrderSize
 import io.teapot.domain.entity.OrderWithoutId
-import io.teapot.usecase.beverages.validator.OrderWithoutIdValidator
 import io.teapot.usecase.validation.ValidationErrors
 
 class OrderWithoutIdValidatorTest : DescribeSpec({

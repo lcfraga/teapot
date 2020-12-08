@@ -5,15 +5,16 @@ import io.teapot.dataprovider.repositories.OrdersRepository
 import io.teapot.usecase.beverages.CreateBeverage
 import io.teapot.usecase.beverages.DeleteBeverage
 import io.teapot.usecase.beverages.FindAllBeverages
+import io.teapot.usecase.beverages.FindAllOrders
 import io.teapot.usecase.beverages.FindBeverage
 import io.teapot.usecase.beverages.FindOrder
 import io.teapot.usecase.beverages.OrderBeverage
 import io.teapot.usecase.beverages.UpdateBeverage
+import io.teapot.usecase.beverages.port.ClockPort
 import io.teapot.usecase.beverages.port.GenerateIdPort
 import io.teapot.usecase.beverages.port.TeapotPort
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import java.time.Instant
 
 @Configuration
 class UseCaseConfiguration {
@@ -44,6 +45,9 @@ class UseCaseConfiguration {
     )
 
     @Bean
+    fun findAllOrders(ordersRepository: OrdersRepository) = FindAllOrders(ordersRepository)
+
+    @Bean
     fun findOrder(ordersRepository: OrdersRepository) = FindOrder(ordersRepository)
 
     @Bean
@@ -51,12 +55,13 @@ class UseCaseConfiguration {
         beveragesRepository: BeveragesRepository,
         teapotPort: TeapotPort,
         generateIdPort: GenerateIdPort,
+        clockPort: ClockPort,
         ordersRepository: OrdersRepository
     ) = OrderBeverage(
         beveragesRepository,
         teapotPort,
         generateIdPort,
-        { Instant.now() },
+        clockPort,
         ordersRepository
     )
 }

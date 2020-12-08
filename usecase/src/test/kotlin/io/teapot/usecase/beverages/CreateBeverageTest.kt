@@ -1,4 +1,4 @@
-package io.teapot.application.usecase.beverages
+package io.teapot.usecase.beverages
 
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.matchers.shouldBe
@@ -11,8 +11,6 @@ import io.mockk.verify
 import io.mockk.verifyOrder
 import io.teapot.domain.entity.Beverage
 import io.teapot.domain.entity.BeverageWithoutId
-import io.teapot.usecase.beverages.CreateBeverage
-import io.teapot.usecase.beverages.CreateBeverageResult
 import io.teapot.usecase.beverages.port.FindBeveragePort
 import io.teapot.usecase.beverages.port.GenerateIdPort
 import io.teapot.usecase.beverages.port.SaveBeveragePort

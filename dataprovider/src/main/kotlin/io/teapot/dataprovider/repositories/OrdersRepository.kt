@@ -3,8 +3,13 @@ package io.teapot.dataprovider.repositories
 import io.teapot.dataprovider.entities.OrderEntity
 import io.teapot.domain.entity.Order
 import io.teapot.domain.entity.OrderSize
+import io.teapot.usecase.beverages.port.FindAllOrdersPort
 import io.teapot.usecase.beverages.port.FindOrderPort
 import io.teapot.usecase.beverages.port.SaveOrderPort
+import io.teapot.usecase.pagination.FoundPage
+import io.teapot.usecase.pagination.RequestedPage
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import java.util.Optional
 
 private fun OrderEntity.toOrder() = Order(
@@ -31,7 +36,18 @@ private fun Order.toOrderEntity() = OrderEntity(
 
 class OrdersRepository(
     private val jpaOrdersRepository: JpaOrdersRepository
-) : FindOrderPort, SaveOrderPort {
+) : FindAllOrdersPort, FindOrderPort, SaveOrderPort {
+
+    override fun findAll(requestedPage: RequestedPage): FoundPage<Order> {
+        return jpaOrdersRepository
+            .findAll(
+                PageRequest.of(
+                    requestedPage.page - 1, // Spring uses 0-based pagination.
+                    requestedPage.size,
+                    Sort.by(Sort.Direction.DESC, "createdAt")
+                )
+            ).toFoundPage(OrderEntity::toOrder)
+    }
 
     override fun findById(id: String): Optional<Order> {
         return jpaOrdersRepository

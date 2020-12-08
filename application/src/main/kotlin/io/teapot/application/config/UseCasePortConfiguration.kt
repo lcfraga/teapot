@@ -6,10 +6,12 @@ import io.teapot.dataprovider.repositories.JpaOrdersRepository
 import io.teapot.dataprovider.repositories.OrdersRepository
 import io.teapot.domain.entity.Order
 import io.teapot.domain.entity.OrderSize
+import io.teapot.usecase.beverages.port.ClockPort
 import io.teapot.usecase.beverages.port.GenerateIdPort
 import io.teapot.usecase.beverages.port.TeapotPort
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import java.time.Instant
 import java.util.UUID
 import kotlin.random.Random
 
@@ -45,4 +47,7 @@ class UseCasePortConfiguration {
             // Do nothing.
         }
     }
+
+    @Bean
+    fun clockPort(): ClockPort = ClockPort { Instant.now() }
 }
