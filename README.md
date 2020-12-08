@@ -5,7 +5,7 @@ An HTTP API for creating and adjusting beverages, and ordering them from a teapo
 
 ## Minimum requirements
 
-OpenJDK `11` and recent versions of `docker` and `docker-compose`.
+OpenJDK 11 and recent versions of `docker` and `docker-compose`. If OpenJDK 11 is not installed, the build will try to install it.
 
 
 ## Build
@@ -59,6 +59,8 @@ Once that's done, we can use the `EXPOSED_TEAPOT_PORT` environment variable to o
 EXPOSED_TEAPOT_PORT=8081 docker-compose up
 ```
 
+The application may fail to start if it tries to connect to the database before the database is ready. In that case, restart the application service with `docker-compose restart teapot`.
+
 
 ### Monitoring
 
@@ -91,3 +93,11 @@ This will start PostgreSQL, which will be available at port `5432`. You can use 
 ```
 EXPOSED_POSTGRESQL_PORT=5433 docker-compose up postgresql
 ```
+
+
+## TODO
+
+* [ ] Individual setting update
+* [ ] Fine-graned transaction management
+* [ ] User registration and JWT authentication
+* [ ] Asynchronous brew queue
