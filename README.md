@@ -61,6 +61,8 @@ EXPOSED_TEAPOT_PORT=8081 docker-compose up
 
 The application may fail to start if it tries to connect to the database before the database is ready. In that case, restart the application service with `docker-compose restart teapot`.
 
+Unless `EXPOSED_TEAPOT_PORT` is set, Swagger UI will be available at http://localhost:8080/swagger-ui.html.
+
 
 ### Monitoring
 
