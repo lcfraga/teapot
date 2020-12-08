@@ -36,11 +36,11 @@ class BeveragesController(
     private val deleteBeverage: DeleteBeverage
 ) : BeveragesApi {
 
-    override fun findAll(): List<BeverageResponseBody> {
-        return when (val findAllBeveragesResult = findAllBeverages.findAll()) {
+    override fun findAll(paginationParameters: PaginationParameters): PaginatedResponse<BeverageResponseBody> {
+        return when (val findAllBeveragesResult = findAllBeverages.findAll(paginationParameters.toRequestedPage())) {
             is FindAllBeveragesResult.Found ->
                 findAllBeveragesResult.beverages
-                    .map(Beverage::toBeverageResponseBody)
+                    .toPaginatedResponse(Beverage::toBeverageResponseBody)
         }
     }
 

@@ -6,6 +6,10 @@ import io.teapot.usecase.beverages.port.DeleteBeveragePort
 import io.teapot.usecase.beverages.port.FindAllBeveragesPort
 import io.teapot.usecase.beverages.port.FindBeveragePort
 import io.teapot.usecase.beverages.port.SaveBeveragePort
+import io.teapot.usecase.pagination.FoundPage
+import io.teapot.usecase.pagination.RequestedPage
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Sort
 import java.util.Optional
 
 private fun BeverageEntity.toBeverage() = Beverage(
@@ -24,10 +28,17 @@ class BeveragesRepository(
     private val jpaBeveragesRepository: JpaBeveragesRepository
 ) : FindAllBeveragesPort, FindBeveragePort, SaveBeveragePort, DeleteBeveragePort {
 
-    override fun findAll(): List<Beverage> {
+    override fun findAll(requestedPage: RequestedPage): FoundPage<Beverage> {
         return jpaBeveragesRepository
-            .findAll()
-            .map(BeverageEntity::toBeverage)
+            .findAll(
+                PageRequest.of(
+                    requestedPage.page - 1, // Spring uses 0-based pagination.
+                    requestedPage.size,
+                    Sort.by(
+                        Sort.Order(Sort.Direction.ASC, "name").ignoreCase()
+                    )
+                )
+            ).toFoundPage(BeverageEntity::toBeverage)
     }
 
     override fun findById(id: String): Optional<Beverage> {

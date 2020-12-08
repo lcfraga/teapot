@@ -1,7 +1,9 @@
 package io.teapot.application.api
 
 import io.swagger.v3.oas.annotations.Operation
-import io.swagger.v3.oas.annotations.media.ArraySchema
+import io.swagger.v3.oas.annotations.Parameter
+import io.swagger.v3.oas.annotations.Parameters
+import io.swagger.v3.oas.annotations.enums.ParameterIn
 import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
@@ -25,23 +27,26 @@ data class BeverageResponseBody(val id: String, val name: String, val settings: 
 @RequestMapping("/beverages")
 @Tag(name = "Beverages", description = "Create, update, find and delete beverages")
 interface BeveragesApi {
-    @Operation(summary = "Find all beverages")
+    @Operation(summary = "Find all beverages (paginated)")
     @ApiResponses(
-        value = [
-            ApiResponse(
-                responseCode = "200",
-                description = "Beverages found",
-                content = [
-                    Content(
-                        mediaType = "application/json",
-                        array = ArraySchema(schema = Schema(implementation = BeverageResponseBody::class))
-                    )
-                ]
-            )
-        ]
+        value = [ApiResponse(responseCode = "200", description = "Beverages found")]
+    )
+    @Parameters(
+        Parameter(
+            `in` = ParameterIn.QUERY,
+            name = "page",
+            schema = Schema(type = "integer", defaultValue = PaginationParameters.DEFAULT_PAGE.toString())
+        ),
+        Parameter(
+            `in` = ParameterIn.QUERY,
+            name = "size",
+            schema = Schema(type = "integer", defaultValue = PaginationParameters.DEFAULT_SIZE.toString())
+        )
     )
     @GetMapping(produces = ["application/json"])
-    fun findAll(): List<BeverageResponseBody>
+    fun findAll(
+        @Parameter(hidden = true) paginationParameters: PaginationParameters
+    ): PaginatedResponse<BeverageResponseBody>
 
     @Operation(summary = "Find beverage by ID")
     @ApiResponses(
