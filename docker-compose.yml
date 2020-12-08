@@ -7,6 +7,8 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql/teapot?user=teapot&password=teapot
     ports:
       - ${EXPOSED_TEAPOT_PORT:-8080}:8080
+    links:
+      - postgresql
 
   postgresql:
     image: postgres:13.1-alpine
