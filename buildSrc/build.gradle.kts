@@ -11,7 +11,7 @@ repositories {
 }
 
 object Plugins {
-    const val KOTLIN = "1.4.20"
+    const val KOTLIN = "1.4.21"
     const val DETEKT = "1.15.0-RC1"
     const val KORDAMP = "0.41.0"
     const val FLYWAY = "7.2.1"

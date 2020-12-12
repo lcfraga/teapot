@@ -1,8 +1,8 @@
 plugins {
     `kotlin-common`
     `kotlin-library`
-    kotlin("plugin.spring") version "1.4.20"
-    kotlin("plugin.jpa") version "1.4.20"
+    kotlin("plugin.spring") version "1.4.21"
+    kotlin("plugin.jpa") version "1.4.21"
     id("org.flywaydb.flyway")
 }
 
