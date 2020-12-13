@@ -9,6 +9,7 @@ import io.teapot.usecase.beverages.FindAllOrders
 import io.teapot.usecase.beverages.FindBeverage
 import io.teapot.usecase.beverages.FindOrder
 import io.teapot.usecase.beverages.OrderBeverage
+import io.teapot.usecase.beverages.ServeOrder
 import io.teapot.usecase.beverages.UpdateBeverage
 import io.teapot.usecase.beverages.port.ClockPort
 import io.teapot.usecase.beverages.port.GenerateIdPort
@@ -61,6 +62,13 @@ class UseCaseConfiguration {
         beveragesRepository,
         teapotPort,
         generateIdPort,
+        clockPort,
+        ordersRepository
+    )
+
+    @Bean
+    fun serveOrder(ordersRepository: OrdersRepository, clockPort: ClockPort) = ServeOrder(
+        ordersRepository,
         clockPort,
         ordersRepository
     )

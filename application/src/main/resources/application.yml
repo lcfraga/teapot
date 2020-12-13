@@ -2,6 +2,8 @@ logging:
   level:
     org:
       springframework:
+        orm:
+          jpa: INFO
         web:
           filter:
             CommonsRequestLoggingFilter: DEBUG
@@ -50,3 +52,6 @@ springdoc:
   show-actuator: true
   swagger-ui:
     enabled: true
+
+teapot:
+  menu: chai tea,green tea,english breakfast,earl grey
