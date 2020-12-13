@@ -12,6 +12,8 @@ services:
 
   postgresql:
     image: postgres:13.1-alpine
+    volumes:
+      - ./docker/postgresql:/docker-entrypoint-initdb.d:ro
     ports:
       - ${EXPOSED_POSTGRESQL_PORT:-5432}:5432
     environment:
