@@ -18,15 +18,16 @@ dependencies {
     implementation(project(":domain"))
 
     // Spring Boot
-    implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
+    // Jackson support for Kotlin
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     // Spring Doc/Swagger UI
     implementation("org.springdoc:springdoc-openapi-kotlin:${DependencyVersions.SPRING_DOC}")
     implementation("org.springdoc:springdoc-openapi-ui:${DependencyVersions.SPRING_DOC}")
-
-    // Jackson support for Kotlin
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
     // Prometheus actuator
     implementation("io.micrometer:micrometer-registry-prometheus:${DependencyVersions.PROMETHEUS}")

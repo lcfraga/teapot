@@ -14,6 +14,7 @@ import io.teapot.usecase.beverages.UpdateBeverage
 import io.teapot.usecase.beverages.UpdateBeverageResult
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.RestController
 
 private fun CreateBeverageRequest.toBeverageWithoutId() = BeverageWithoutId(
@@ -36,6 +37,7 @@ class BeveragesController(
     private val deleteBeverage: DeleteBeverage
 ) : BeveragesApi {
 
+    @Transactional(readOnly = true)
     override fun findAll(paginationParameters: PaginationParameters): PaginatedResponse<BeverageResponseBody> {
         return when (val findAllBeveragesResult = findAllBeverages.findAll(paginationParameters.toRequestedPage())) {
             is FindAllBeveragesResult.Found ->
@@ -44,6 +46,7 @@ class BeveragesController(
         }
     }
 
+    @Transactional(readOnly = true)
     override fun findById(id: String): ResponseEntity<Any> {
         return when (val findBeverageResult = findBeverage.findById(id)) {
             is FindBeverageResult.Found ->
@@ -57,6 +60,7 @@ class BeveragesController(
         }
     }
 
+    @Transactional
     override fun create(createUserRequest: CreateBeverageRequest): ResponseEntity<Any> {
         return when (val createBeverageResult = createBeverage.create(createUserRequest.toBeverageWithoutId())) {
             is CreateBeverageResult.Created ->
@@ -74,6 +78,7 @@ class BeveragesController(
         }
     }
 
+    @Transactional
     override fun update(id: String, updateUserRequest: UpdateBeverageRequest): ResponseEntity<Any> {
         return when (val updateBeverageResult = updateBeverage.update(id, updateUserRequest.toBeverageWithoutId())) {
             is UpdateBeverageResult.Updated ->
@@ -95,6 +100,7 @@ class BeveragesController(
         }
     }
 
+    @Transactional
     override fun deleteById(id: String): ResponseEntity<Any> {
         return when (deleteBeverage.deleteById(id)) {
             is DeleteBeverageResult.Deleted ->

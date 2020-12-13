@@ -100,6 +100,5 @@ EXPOSED_POSTGRESQL_PORT=5433 docker-compose up postgresql
 ## TODO
 
 * [ ] Individual setting update
-* [ ] Fine-graned transaction management
 * [ ] User registration and JWT authentication
-* [ ] Asynchronous brew queue
+* [ ] External brew queue, e.g., using Redis

@@ -10,6 +10,7 @@ import io.teapot.usecase.beverages.OrderBeverage
 import io.teapot.usecase.beverages.OrderBeverageResult
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.RestController
 
 private fun OrderBeverageRequest.toOrderWithoutId() = OrderWithoutId(
@@ -36,6 +37,7 @@ class OrdersController(
     private val orderBeverage: OrderBeverage
 ) : OrdersApi {
 
+    @Transactional(readOnly = true)
     override fun findAll(paginationParameters: PaginationParameters): PaginatedResponse<OrderResponseBody> {
         return when (val findAllOrdersResult = findAllOrders.findAll(paginationParameters.toRequestedPage())) {
             is FindAllOrdersResult.Found ->
@@ -44,6 +46,7 @@ class OrdersController(
         }
     }
 
+    @Transactional(readOnly = true)
     override fun findById(id: String): ResponseEntity<Any> {
         return when (val findOrderResult = findOrder.findById(id)) {
             is FindOrderResult.Found ->
@@ -57,6 +60,7 @@ class OrdersController(
         }
     }
 
+    @Transactional
     override fun create(orderBeverageRequest: OrderBeverageRequest): ResponseEntity<Any> {
         return when (val orderBeverageResult = orderBeverage.order(orderBeverageRequest.toOrderWithoutId())) {
             is OrderBeverageResult.Ordered ->
